@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head.ejs') %>
+
+<body>
+  <%- include('./partials/nav.ejs') %>
+
+  <div class="blogs content">
+    <h2 class="latest-posts">Latest Posts</h2>
+
+    <% if (blogs.length> 0) { %> <% blogs.forEach(blog=> { %>
+    <div class="blog-post">
+      <a href="/blogs/<%= blog._id %>" style="
+    text-decoration: none">
+        <div class="blog-date">
+          <span class="date-day">
+            <%= new Date(blog.createdAt).getDate() %>
+          </span>
+          <span class="date-month">
+            <%= new Date(blog.createdAt).toLocaleString('default', { month: 'short' }) %>
+          </span>
+          <span class="date-year">
+            <%= new Date(blog.createdAt).getFullYear() %>
+          </span>
+        </div>
+        <div class="blog-content">
+          <h2 class="title">
+            <%= blog.title %>
+          </h2>
+          <p class="snippet">
+            <%= blog.snippet %>
+          </p>
+          <p class="meta">
+            <%= blog.body %>
+          </p>
+        </div>
+      </a>
+    </div>
+    <% }) %>
+    <% } else { %>
+    <p>There are no blogs to display</p>
+    <% } %>
+  </div>
+
+  <%- include('./partials/footer.ejs') %>
+</body>
+
+</html>
